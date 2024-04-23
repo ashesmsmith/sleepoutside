@@ -3,3 +3,4 @@ https://trello.com/b/prs7eOkh/wdd-300-block-sleep-outside
 
 Team Members:
 Ashley Smith
+Egor Sotnikov
