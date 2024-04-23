@@ -50,7 +50,7 @@ export function addProductToCart(product) {
 
     if (!productExists) {
       // add new product to existing cart
-      dataToSave = [...cart, { ...product, qty: 1 }]
+      dataToSave = [...cart, { ...product, qty: 1 }];
     } else dataToSave = cart;
   }
 
