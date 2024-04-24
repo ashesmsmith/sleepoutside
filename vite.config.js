@@ -1,5 +1,6 @@
 import { resolve } from "path";
 import { defineConfig } from "vite";
+import * as fs from "fs";
 
 export default defineConfig({
   root: "src/",
@@ -23,8 +24,27 @@ export default defineConfig({
         product4: resolve(
           __dirname,
           "src/product_pages/northface-talus-4.html",
-        ),
+        )
       },
     },
+    plugins: [],
   },
+  plugins: [
+    {
+      name: "copy-json-to-dist",
+      writeBundle() {
+        const destDir = resolve(__dirname, "dist/json");
+
+        // Create the dist/json folder if it doesn't exist
+        if (!fs.existsSync(destDir)) {
+          fs.mkdirSync(destDir, { recursive: true });
+        }
+
+        fs.copyFileSync(
+          resolve(__dirname, "src/json/tents.json"),
+          resolve(__dirname, "dist/json/tents.json")
+        );
+      },
+    },
+  ],
 });
