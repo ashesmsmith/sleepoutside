@@ -1,5 +1,6 @@
 import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
+import { updateCartCounter } from "./cart";
 
 const dataSource = new ProductData("tents");
 
@@ -14,6 +15,8 @@ function addProductToCart(product) {
   } else {
     cart.push({ id: product.Id, quantity: 1, ...product });
   }
+
+  updateCartCounter(cart);
 
   setLocalStorage("so-cart", cart);
 }

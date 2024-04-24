@@ -103,11 +103,33 @@ button {
   text-align: center;
 }
 
+.cart-link {
+  display: inline-block;
+  position: relative;
+}
+
+.cart-counter {
+  display: none;
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  background-color: var(--primary-color);
+  font-size: var(--small-font);
+  text-align: center;
+  border-radius: 15px;
+  padding: 2px;
+  min-width: 21px;
+}
+
 .cart svg {
   width: 25px;
 }
 .cart:hover svg {
   fill: gray;
+}
+
+.cart:hover .cart-counter {
+  opacity: 0.8;
 }
 
 /* End cart icon styles */
