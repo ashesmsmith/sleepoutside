@@ -109,7 +109,7 @@ button {
 }
 
 .cart-counter {
-  /* display: none; */
+  display: none;
   position: absolute;
   top: -10px;
   right: -5px;
@@ -126,6 +126,10 @@ button {
 }
 .cart:hover svg {
   fill: gray;
+}
+
+.cart:hover .cart-counter {
+  opacity: 0.8;
 }
 
 /* End cart icon styles */
