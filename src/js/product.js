@@ -7,7 +7,7 @@ function addProductToCart(product) {
   let cart = getLocalStorage("so-cart");
   if (!Array.isArray(cart)) cart = [];
 
-  let existingProduct = cart.find(item => item.id === product.Id);
+  let existingProduct = cart.find((item) => item.id === product.Id);
 
   if (existingProduct) {
     existingProduct.quantity += 1;
@@ -25,4 +25,6 @@ async function addToCartHandler(e) {
 }
 
 // Add listener to Add to Cart button
-document.getElementById("addToCart").addEventListener("click", addToCartHandler);
+document
+  .getElementById("addToCart")
+  .addEventListener("click", addToCartHandler);
