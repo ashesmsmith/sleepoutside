@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 const cartLSKey = "so-cart";
 
@@ -60,7 +60,7 @@ function deleteFromCart(event) {
   const cartItems = getLocalStorage(cartLSKey) || [];
 
   const updatedCart = cartItems.filter((item) => item.Id !== itemId);
-  localStorage.setItem(cartLSKey, JSON.stringify(updatedCart));
+  setLocalStorage(cartLSKey, updatedCart);
 
   renderCartContents();
   updateCartCounter(updatedCart);
