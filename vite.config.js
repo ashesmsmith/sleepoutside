@@ -24,7 +24,7 @@ export default defineConfig({
         product4: resolve(
           __dirname,
           "src/product_pages/northface-talus-4.html",
-        )
+        ),
       },
     },
     plugins: [],
@@ -42,7 +42,7 @@ export default defineConfig({
 
         fs.copyFileSync(
           resolve(__dirname, "src/json/tents.json"),
-          resolve(__dirname, "dist/json/tents.json")
+          resolve(__dirname, "dist/json/tents.json"),
         );
       },
     },
