@@ -30,6 +30,9 @@ export default class ProductListing {
         // getData() creates the list of products from that source
         const list = await this.dataSource.getData();
 
+        //remove extra products from list
+        this.removeExtra(list);
+
         // use list data to fill in productCardTemplate
         this.renderList(list);
     }
@@ -44,5 +47,18 @@ export default class ProductListing {
         // const htmlStrings = list.map(productCardTemplate);
         // // add each product card after the previous element
         // this.listElement.insertAdjacentHTML("afterBegin", htmlStrings.join(''));
+    }
+
+    removeExtra(list) {
+        const topProducts = ["880RR", "985RF", "985PR", "344YJ"]
+
+        list.forEach((product) => {
+            if(topProducts.includes(product.Id)) {
+             // do nothing
+            }
+            else {
+                list.pop(product);
+            }
+        })
     }
 }
