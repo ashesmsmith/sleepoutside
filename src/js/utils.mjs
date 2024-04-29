@@ -9,10 +9,12 @@ export function qs(selector, parent = document) {
 export function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
+
 // save data to local storage
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
+
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
@@ -31,12 +33,19 @@ export function getParams(param) {
   return product;
  }
 
- // take list of objects and template, insert objects as HTML into the DOM
+ // take template, parent html element, list of products
+ // insert objects as HTML into the DOM
+ // most often afterbegin is used and we don't want to clear out the existing contents so we set them as default values
 export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  // split data into key-value pairs for each product (map)
+  // pass each product into template
   const htmlStrings = list.map(templateFn);
-  // if clear is true we need to clear out the contents of the parent.
+
+  // if clear is true, clear out contents of parent element
   if (clear) {
     parentElement.innerHTML = "";
   }
+
+  // add each product card after the previous element
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
