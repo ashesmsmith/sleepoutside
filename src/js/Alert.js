@@ -21,9 +21,13 @@ export default class Alert {
 
     const section = document.createElement("section");
     section.classList.add("alert-list");
-    section.innerHTML = alerts.map(alert => `
-      <p class="alert" style="background: ${alert.background}; color: ${alert.color}">${alert.message}</p>
-    `).join("");
+    section.innerHTML = alerts
+      .map(
+        (alert) => `
+        <p class="alert" style="background: ${alert.background}; color: ${alert.color}">${alert.message}</p>
+      `,
+      )
+      .join("");
 
     let alertParent;
     if (typeof elementOrSelector === "string") {

@@ -6,7 +6,6 @@ const homePageBody = document.querySelector(".home-page");
 updateCartCounter();
 showAlerts();
 
-
 function showAlerts() {
   // only on home page
   if (!homePageBody) return;

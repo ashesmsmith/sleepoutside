@@ -43,6 +43,9 @@ export default defineConfig({
         fs.copyFileSync(
           resolve(__dirname, "src/json/tents.json"),
           resolve(__dirname, "dist/json/tents.json"),
+
+          resolve(__dirname, "src/json/alerts.json"),
+          resolve(__dirname, "dist/json/alerts.json"),
         );
       },
     },
