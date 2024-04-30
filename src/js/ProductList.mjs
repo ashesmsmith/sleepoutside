@@ -1,6 +1,5 @@
 // Purpose: Create a list  of product cards in HTML form array
 // small product card for home page or pages with multiple products listed
-
 import { renderListWithTemplate } from "./utils.mjs";
 
 function productCardTemplate(product) {
