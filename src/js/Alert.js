@@ -41,8 +41,8 @@ export default class Alert {
     htmlEl.classList.add(modalActiveClass);
     alertParent.appendChild(section);
 
-    const top = window.innerHeight / 2 - section.offsetHeight / 2;
-    const left = window.innerWidth / 2 - section.offsetWidth / 2;
+    const top = (window.innerHeight / 2 - section.offsetHeight / 2 + window.scrollY).toFixed();
+    const left = (window.innerWidth / 2 - section.offsetWidth / 2).toFixed();
     section.style = `left: ${left}px; top: ${top}px; opacity: 1;`;
 
     htmlEl.addEventListener("click", function listenerFunc(e) {
