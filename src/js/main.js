@@ -5,8 +5,6 @@ import Alert from "./Alert";
 
 const homePageBody = document.querySelector(".home-page");
 
-const homePageBody = document.querySelector(".home-page");
-
 function showProducts() {
   if (!homePageBody) return;
   // send category of "tents" to ProductData class to create access to file
