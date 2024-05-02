@@ -12,12 +12,13 @@ export default class Alert {
       return result;
     } catch (error) {
       console.error("Alert request error: ", error);
+      return false;
     }
   }
 
   async show(elementOrSelector) {
     const alerts = await this.getData();
-    if (alerts.length === 0) return;
+    if (!alerts || alerts.length === 0) return;
 
     const section = document.createElement("section");
     section.classList.add("alert-list");
@@ -41,7 +42,11 @@ export default class Alert {
     htmlEl.classList.add(modalActiveClass);
     alertParent.appendChild(section);
 
-    const top = (window.innerHeight / 2 - section.offsetHeight / 2 + window.scrollY).toFixed();
+    const top = (
+      window.innerHeight / 2 -
+      section.offsetHeight / 2 +
+      window.scrollY
+    ).toFixed();
     const left = (window.innerWidth / 2 - section.offsetWidth / 2).toFixed();
     section.style = `left: ${left}px; top: ${top}px; opacity: 1;`;
 
