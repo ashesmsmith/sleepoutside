@@ -19,5 +19,5 @@ function showProducts() {
   listing.init();
 }
 
-updateCartCounter();
 showProducts();
+updateCartCounter();
