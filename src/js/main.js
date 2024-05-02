@@ -28,6 +28,6 @@ function showAlerts() {
   // only on home page
   if (!homePageBody) return;
 
-  const alert = new Alert("../json/alerts.json");
+  const alert = new Alert("/json/alerts.json");
   alert.show(homePageBody);
 }

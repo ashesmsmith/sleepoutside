@@ -12,12 +12,13 @@ export default class Alert {
       return result;
     } catch (error) {
       console.error("Alert request error: ", error);
+      return false;
     }
   }
 
   async show(elementOrSelector) {
     const alerts = await this.getData();
-    if (alerts.length === 0) return;
+    if (!alerts || alerts.length === 0) return;
 
     const section = document.createElement("section");
     section.classList.add("alert-list");
