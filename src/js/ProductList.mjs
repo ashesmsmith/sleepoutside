@@ -49,7 +49,7 @@ export default class ProductListing {
     }
 
     removeExtra(list) {
-        const topProducts = ["880RR", "985RF", "985PR", "344YJ"]
+      const topProducts = ["880RR", "989CG", "344YJ", "985PR"];
 
         list.forEach((product) => {
             if(topProducts.includes(product.Id)) {
@@ -58,6 +58,6 @@ export default class ProductListing {
             else {
                 list.pop(product);
             }
-        })
+        });
     }
 }

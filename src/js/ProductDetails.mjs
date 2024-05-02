@@ -33,16 +33,16 @@ export default class ProductDetails {
             .addEventListener("click", this.addProductToCart.bind(this));
     }
 
-    addProductToCart(product) {
+    addProductToCart() {
         let cart = getLocalStorage("so-cart");
         if (!Array.isArray(cart)) cart = [];
       
-        let existingProduct = cart.find((item) => item.id === product.Id);
+        let existingProduct = cart.find((item) => item.id === this.product.Id);
       
         if (existingProduct) {
           existingProduct.quantity += 1;
         } else {
-          cart.push({ id: product.Id, quantity: 1, ...product });
+          cart.push({ id: this.product.Id, quantity: 1, ...this.product });
         }
       
         updateCartCounter(cart);
