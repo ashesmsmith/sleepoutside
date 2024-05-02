@@ -27,10 +27,10 @@ export default class ProductListing {
     async init() {
         // dataSource is connected to ProductData.mjs
         // getData() creates the list of products from that source
-        const list = await this.dataSource.getData();
+        let list = await this.dataSource.getData();
 
         //remove extra products from list
-        this.removeExtra(list);
+        list = this.removeExtra(list);
 
         // use list data to fill in productCardTemplate
         this.renderList(list);
@@ -49,15 +49,8 @@ export default class ProductListing {
     }
 
     removeExtra(list) {
-      const topProducts = ["880RR", "989CG", "344YJ", "985PR"];
+      const topProducts = ["880RR", "985RF", "344YJ", "985PR"];
 
-        list.forEach((product) => {
-            if(topProducts.includes(product.Id)) {
-             // do nothing
-            }
-            else {
-                list.pop(product);
-            }
-        });
+      return list.filter(product => topProducts.includes(product.Id));
     }
 }
