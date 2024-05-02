@@ -2,18 +2,25 @@ import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 import { updateCartCounter } from "./cart";
 
 function productDetailsTemplate(product) {
+    const hasDiscount = product.SuggestedRetailPrice > product.FinalPrice;
+    const discountAmount = hasDiscount ? product.SuggestedRetailPrice - product.FinalPrice : 0;
+    const discountPercentage = hasDiscount ? ((discountAmount / product.SuggestedRetailPrice) * 100).toFixed(2) : 0;
+
     return `<section class="product-detail">
         <h3>${product.Brand.Name}</h3>
         <h2 class="divider">${product.NameWithoutBrand}</h2>
         <img class="divider" src="${product.Image}" alt="${product.NameWithoutBrand}"/>
-        <p class="product-card__price">${product.FinalPrice}</p>
+        <p class="product-card__price">Suggested Retail: $${product.SuggestedRetailPrice.toFixed(2)}</p>
+        ${hasDiscount ? `<p class="product-card__discount">${discountPercentage}% Discount</p>` : ''}
+        <p class="product-card__price">Current Price: $${product.FinalPrice}</p>
         <p class="product__color">${product.Colors[0].ColorName}</p>
         <p class="product__description">${product.DescriptionHtmlSimple}</p>
         <div class="product-detail__add">
             <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
         </div>
-    </section>`
+    </section>`;
 }
+
 
 export default class ProductDetails {
     constructor(productId, dataSource) {
