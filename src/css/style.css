@@ -169,6 +169,13 @@ button {
   margin: 0.5em 0;
 }
 
+.product-card__discount {
+  color: rgb(0, 179, 0);
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .card__brand {
   font-size: var(--small-font);
 }
