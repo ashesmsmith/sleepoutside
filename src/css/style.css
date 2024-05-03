@@ -169,11 +169,30 @@ button {
   margin: 0.5em 0;
 }
 
-.product-card__discount {
-  color: rgb(0, 179, 0);
+.product-card .product-card_price strong {
   font-weight: bold;
-  margin-top: 10px;
-  margin-bottom: 10px;
+}
+
+.product-card .product-card_price .original-price {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.product-card .product-card_price .discount-percentage {
+  color: green;
+}
+
+.product-card__price strong {
+  font-weight: bold;
+}
+
+.product-card__price .original-price {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.product-card__price .discount-percentage {
+  color: green;
 }
 
 .card__brand {
