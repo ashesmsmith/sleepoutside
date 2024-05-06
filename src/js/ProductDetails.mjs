@@ -9,10 +9,13 @@ function productDetailsTemplate(product) {
     return `<section class="product-detail">
         <h3>${product.Brand.Name}</h3>
         <h2 class="divider">${product.NameWithoutBrand}</h2>
-        <img class="divider" src="${product.Image}" alt="${product.NameWithoutBrand}"/>
-        <p class="product-card__price">
-            <strong>Now: $${product.FinalPrice}</strong>
-            ${hasDiscount ? ` <span style="text-decoration: line-through; color: grey;">Was: $${product.SuggestedRetailPrice.toFixed(2)}</span> <span style="color: green;">${discountPercentage}% off</span>` : ''}
+        <div class="image-container">
+            <img class="divider" src="${product.Image}" alt="${product.NameWithoutBrand}"/>
+            ${hasDiscount ? `<span class="discount-flag">Discounted ${discountPercentage}%</span>` : ''}
+        </div>
+        <p class="product-card_price">
+        <strong>$${product.FinalPrice}</strong>
+        ${hasDiscount ? ` <span class="discount-pill">${discountPercentage}% off</span> <span class="original-price">was $${product.SuggestedRetailPrice.toFixed(2)}</span>` : ''}
         </p>
         <p class="product__color">${product.Colors[0].ColorName}</p>
         <p class="product__description">${product.DescriptionHtmlSimple}</p>
