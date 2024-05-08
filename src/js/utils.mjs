@@ -33,8 +33,9 @@ export function getParams(param) {
   // get the first param/product Id
   const product = urlParams.get(param);
   // return product Id/first param
+  console.log(product);
   return product;
- }
+}
 
  // take template, parent html element, list of products
  // insert objects as HTML into the DOM

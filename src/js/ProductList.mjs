@@ -34,13 +34,15 @@ export default class ProductListing {
     async init() {
         // dataSource is connected to ProductData.mjs
         // getData() creates the list of products from that source
-        let list = await this.dataSource.getData();
+        // let list = await this.dataSource.getData();
+        const list = await this.dataSource.getData(this.category);
 
         //remove extra products from list
-        list = this.removeExtra(list);
+        // list = this.removeExtra(list);
 
         // use list data to fill in productCardTemplate
         this.renderList(list);
+        document.querySelector(".title").innerHTML = this.category;
     }
 
     renderList(list) {
@@ -55,9 +57,9 @@ export default class ProductListing {
         // this.listElement.insertAdjacentHTML("afterBegin", htmlStrings.join(''));
     }
 
-    removeExtra(list) {
-      const topProducts = ["880RR", "985RF", "344YJ", "985PR"];
+    // removeExtra(list) {
+    //   const topProducts = ["880RR", "985RF", "344YJ", "985PR"];
 
-      return list.filter(product => topProducts.includes(product.Id));
-    }
+    //   return list.filter(product => topProducts.includes(product.Id));
+    // }
 }
