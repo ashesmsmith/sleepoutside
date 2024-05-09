@@ -5,7 +5,7 @@ import ProductListing from "./ProductList.mjs";
 // get category value from URL
 const category = getParams("category");
 
-document.querySelector(".page-title").innerHTML = `Top Products: ${category}`;
+document.querySelector(".page-title").innerHTML += `${category}`;
 
 // create an instance of ProductData
 const dataSource = new ProductData(category);

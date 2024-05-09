@@ -17,8 +17,8 @@ export default class ProductData {
   }
 
   // create list of products from json file
-  async getData(category) {
-    const response = await fetch(baseURL + `products/search/${category}`);
+  async getData() {
+    const response = await fetch(baseURL + `products/search/${this.category}`);
     const data = await convertToJson(response);
     return data.Result;
     // return fetch(this.path)
