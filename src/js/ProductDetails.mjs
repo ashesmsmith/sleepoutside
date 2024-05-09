@@ -10,7 +10,7 @@ function productDetailsTemplate(product) {
         <h3>${product.Brand.Name}</h3>
         <h2 class="divider">${product.NameWithoutBrand}</h2>
         <div class="image-container">
-            <img class="divider" src="${product.Image}" alt="${product.NameWithoutBrand}"/>
+            <img class="divider" src="${product.Images.PrimaryLarge}" alt="${product.NameWithoutBrand}"/>
             ${hasDiscount ? `<span class="discount-flag">Discounted ${discountPercentage}%</span>` : ''}
         </div>
         <p class="product-card_price">

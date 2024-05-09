@@ -33,7 +33,6 @@ export function getParams(param) {
   // get the first param/product Id
   const product = urlParams.get(param);
   // return product Id/first param
-  console.log(product);
   return product;
 }
 
@@ -50,4 +49,8 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   }
   // add each product card after the previous element
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
+
+export function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }

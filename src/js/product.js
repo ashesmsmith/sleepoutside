@@ -3,7 +3,8 @@ import ProductData from "./ProductData.mjs";
 import ProductDetails from "./ProductDetails.mjs";
 
 // create a link to needed json file
-const dataSource = new ProductData("tents");
+const category = getParams("category");
+const dataSource = new ProductData(category);
 
 // get product Id from url to show details we need
 const productId = getParams("product");

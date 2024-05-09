@@ -200,7 +200,6 @@ button {
   text-decoration: line-through;
 }
 
-
 .card__brand {
   font-size: var(--small-font);
 }
@@ -341,4 +340,8 @@ button {
 footer {
   font-size: var(--small-font);
   padding: 1em;
+}
+
+.page-title {
+  text-transform: capitalize;
 }
