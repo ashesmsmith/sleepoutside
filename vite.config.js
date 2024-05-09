@@ -15,6 +15,5 @@ export default defineConfig({
         listing: resolve(__dirname, "src/product-listing/index.html"),
       },
     },
-    plugins: [],
   },
 });

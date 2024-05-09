@@ -36,9 +36,9 @@ export function getParams(param) {
   return product;
 }
 
- // take template, parent html element, list of products
- // insert objects as HTML into the DOM
- // most often afterbegin is used and we don't want to clear out the existing contents so we set them as default values
+// take template, parent html element, list of products
+// insert objects as HTML into the DOM
+// most often afterbegin is used and we don't want to clear out the existing contents so we set them as default values
 export function renderListWithTemplate(templateFn, parentElement, list, position = "afterBegin", clear = false) {
   // split data into key-value pairs for each product (map)
   // pass each product into template
@@ -51,6 +51,35 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
 
-export function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+export function renderWithTemplate(template, parent, data, callback) {
+  parent.insertAdjacentHTML("afterbegin", template);
+  if (callback) {
+    callback(data);
+  }
 }
+
+
+export async function loadTemplate(path) {
+  const response = await fetch(path);
+  const html = await response.text();
+  const template = document.createElement("template");
+  template.innerHTML = html;
+  return template.innerHTML;
+}
+
+
+export async function loadHeaderFooter() {
+  const headerTemplateElement = await loadTemplate("../partials/header.html");
+  const headerElement = document.querySelector("#main-header");
+  const footerTemplateElement = await loadTemplate("../partials/footer.html");
+  const footerElement = document.querySelector("#main-footer");
+
+  if (headerElement && footerTemplateElement && footerElement && headerTemplateElement) {
+    renderWithTemplate(headerTemplateElement, headerElement);
+    renderWithTemplate(footerTemplateElement, footerElement);
+  } else {
+    console.error("Some elements or templates are not loaded correctly");
+  }
+
+}
+

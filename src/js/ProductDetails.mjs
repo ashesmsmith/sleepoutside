@@ -1,5 +1,5 @@
 import { setLocalStorage, getLocalStorage } from "./utils.mjs";
-import { updateCartCounter } from "./cart";
+import { updateCartCounter } from "./ShoppingCart.mjs";
 
 function productDetailsTemplate(product) {
     const hasDiscount = product.SuggestedRetailPrice > product.FinalPrice;
@@ -24,6 +24,8 @@ function productDetailsTemplate(product) {
         </div>
     </section>`;
 }
+
+
 
 export default class ProductDetails {
     constructor(productId, dataSource) {
