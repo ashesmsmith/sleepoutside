@@ -50,3 +50,36 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   // add each product card after the previous element
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
+
+export function renderWithTemplate(template, parent, data, callback) {
+  parent.insertAdjacentHTML("afterbegin", template);
+  if(callback) {
+    callback(data);
+  }
+}
+
+
+export async function loadTemplate(path) {
+  const response = await fetch(path);
+  const html = await response.text();
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  return template.innerHTML;
+}
+
+
+export async function loadHeaderFooter() {
+    const headerTemplateElement = await loadTemplate('../partials/header.html');
+    const headerElement = document.querySelector('#main-header');
+    const footerTemplateElement = await loadTemplate('../partials/footer.html');
+    const footerElement = document.querySelector('#main-footer');
+
+    if (headerElement && footerTemplateElement && footerElement && headerTemplateElement) {
+      renderWithTemplate(headerTemplateElement, headerElement);
+      renderWithTemplate(footerTemplateElement, footerElement);
+    } else {
+      console.error("Some elements or templates are not loaded correctly");
+    }
+
+}
+

@@ -90,6 +90,7 @@ button {
   border: 0;
   font-size: var(--large-font);
   cursor: pointer;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 .divider {
   border-bottom: 2px solid var(--primary-color);
@@ -187,7 +188,6 @@ button {
   color: grey;
   text-decoration: line-through;
 }
-
 
 .card__brand {
   font-size: var(--small-font);

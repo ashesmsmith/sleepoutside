@@ -1,6 +1,7 @@
+import { loadHeaderFooter } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
 import ProductListing from "./ProductList.mjs";
-import { updateCartCounter } from "./cart";
+import { updateCartCounter } from "./ShoppingCart.mjs";
 import Alert from "./Alert";
 
 const homePageBody = document.querySelector(".home-page");
@@ -20,10 +21,6 @@ function showProducts() {
   listing.init();
 }
 
-showProducts();
-updateCartCounter();
-showAlerts();
-
 function showAlerts() {
   // only on home page
   if (!homePageBody) return;
@@ -31,3 +28,11 @@ function showAlerts() {
   const alert = new Alert("/json/alerts.json");
   alert.show(homePageBody);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  loadHeaderFooter();
+});
+
+showProducts();
+updateCartCounter();
+showAlerts();
