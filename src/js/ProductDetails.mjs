@@ -10,7 +10,7 @@ function productDetailsTemplate(product) {
         <h3>${product.Brand.Name}</h3>
         <h2 class="divider">${product.NameWithoutBrand}</h2>
         <div class="image-container">
-            <img class="divider" src="${product.Image}" alt="${product.NameWithoutBrand}"/>
+            <img class="divider" src="${product.Images.PrimaryLarge}" alt="${product.NameWithoutBrand}"/>
             ${hasDiscount ? `<span class="discount-flag">Discounted ${discountPercentage}%</span>` : ''}
         </div>
         <p class="product-card_price">
@@ -48,24 +48,24 @@ export default class ProductDetails {
     addProductToCart() {
         let cart = getLocalStorage("so-cart");
         if (!Array.isArray(cart)) cart = [];
-      
+
         let existingProduct = cart.find((item) => item.id === this.product.Id);
-      
+
         if (existingProduct) {
-          existingProduct.quantity += 1;
+            existingProduct.quantity += 1;
         } else {
-          cart.push({ id: this.product.Id, quantity: 1, ...this.product });
+            cart.push({ id: this.product.Id, quantity: 1, ...this.product });
         }
-      
+
         updateCartCounter(cart);
-      
+
         setLocalStorage("so-cart", cart);
     }
 
     renderProductDetails(selector) {
         // use specific element i.e. main or section
         const element = document.querySelector(selector);
-        // insert product details formated with template after selected element
+        // insert product details formatted with template after selected element
         element.insertAdjacentHTML("afterBegin", productDetailsTemplate(this.product));
     }
 }
