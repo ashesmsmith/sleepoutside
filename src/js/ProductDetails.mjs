@@ -7,15 +7,16 @@ function productDetailsTemplate(product) {
     const discountPercentage = hasDiscount ? Math.round((discountAmount / product.SuggestedRetailPrice) * 100) : 0;
 
     return `<section class="product-detail">
+        <a href="/product-listing/index.html?category=${product.Category}" id="breadcrumbs">${product.Category}</a>
         <h3>${product.Brand.Name}</h3>
         <h2 class="divider">${product.NameWithoutBrand}</h2>
         <div class="image-container">
             <img class="divider" src="${product.Images.PrimaryLarge}" alt="${product.NameWithoutBrand}"/>
-            ${hasDiscount ? `<span class="discount-flag">Discounted ${discountPercentage}%</span>` : ''}
+            ${hasDiscount ? `<span class="discount-flag">Discounted ${discountPercentage}%</span>` : ""}
         </div>
         <p class="product-card_price">
         <strong>$${product.FinalPrice}</strong>
-        ${hasDiscount ? ` <span class="discount-pill">${discountPercentage}% off</span> <span class="original-price">was $${product.SuggestedRetailPrice.toFixed(2)}</span>` : ''}
+        ${hasDiscount ? ` <span class="discount-pill">${discountPercentage}% off</span> <span class="original-price">was $${product.SuggestedRetailPrice.toFixed(2)}</span>` : ""}
         </p>
         <p class="product__color">${product.Colors[0].ColorName}</p>
         <p class="product__description">${product.DescriptionHtmlSimple}</p>

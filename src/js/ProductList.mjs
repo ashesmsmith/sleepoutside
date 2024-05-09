@@ -14,7 +14,7 @@ function productCardTemplate(product) {
             <h2 class="card_name">${product.Name}</h2>
             <p class="product-card_price">
                 <strong>$${product.FinalPrice} - </strong> 
-                ${hasDiscount ? ` <span style="color: green;"><strong>after ${discountPercentage}% off</strong></span>` : ''}
+                ${hasDiscount ? ` <span style="color: green;"><strong>after ${discountPercentage}% off</strong></span>` : ""}
             </p>
         </a>
     </li>`;
@@ -42,24 +42,13 @@ export default class ProductListing {
 
     // use list data to fill in productCardTemplate
     this.renderList(list);
-    // document.title = this.category;
+
+    // breadcrumbs
+    document.querySelector("#breadcrumbs").innerHTML = `${this.category} &#10132; (${list.length} items)`;
   }
 
   renderList(list) {
-    // reusable way to accomplish same as below
     // send template, html element, and list of products
     renderListWithTemplate(productCardTemplate, this.listElement, list);
-
-    // // split data into key-value pairs for each product (map)
-    // // pass each product into template
-    // const htmlStrings = list.map(productCardTemplate);
-    // // add each product card after the previous element
-    // this.listElement.insertAdjacentHTML("afterBegin", htmlStrings.join(''));
   }
-
-  // removeExtra(list) {
-  //   const topProducts = ["880RR", "985RF", "344YJ", "985PR"];
-
-  //   return list.filter(product => topProducts.includes(product.Id));
-  // }
 }

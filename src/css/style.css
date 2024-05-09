@@ -185,6 +185,12 @@ button {
   margin: 0.5em 0;
 }
 
+.product-card img {
+  display: block;
+  min-height: 160px;
+  margin: 0 auto;
+}
+
 .product-card_price {
   display: flex;
   align-items: center;
@@ -346,5 +352,10 @@ footer {
 }
 
 .page-title {
+  text-transform: capitalize;
+}
+
+#breadcrumbs {
+  padding-top: 15px;
   text-transform: capitalize;
 }
