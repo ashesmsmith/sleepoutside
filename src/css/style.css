@@ -248,6 +248,7 @@ button {
 .cart-card {
   display: grid;
   grid-template-columns: 25% auto 15%;
+  gap: 1.5rem;
   font-size: var(--small-font);
   /* max-height: 120px; */
   align-items: center;
@@ -278,6 +279,17 @@ button {
 .cart-card__quantity {
   grid-row: 2;
   grid-column: 3;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 2fr;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-card__quantity button {
+  background-color: #a4b8c4;
+  margin: 0 auto;
+  padding: .25rem .5rem;
 }
 
 .cart-card__price {

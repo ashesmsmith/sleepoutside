@@ -15,7 +15,11 @@ function cartItemTemplate(item) {
     </a>
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
     <button class="cart-card_delete"><span data-id="${item.Id}">⨉</span></button>
-    <p class="cart-card__quantity">qty: ${item.quantity}</p>
+    <p class="cart-card__quantity">Qty:
+      <button class="decrease"><</button>
+      ${item.quantity}
+      <button class="increase">></button>
+    </p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
   </li>`;
   
@@ -34,6 +38,21 @@ function renderCartContents() {
     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
     productList.innerHTML = htmlItems.join("");
 
+    // Quantity Buttons
+    const decreaseQty = productList.querySelectorAll(".decrease");
+    decreaseQty.forEach((button) => {
+      button.addEventListener("click", () => {
+        console.log("down"); //TESTING
+      });
+    })
+
+    const increaseQty = productList.querySelectorAll(".increase");
+    increaseQty.forEach((button) => {
+      button.addEventListener("click", () => {
+        console.log("up"); //TESTING
+      });
+    })
+
     let total = 0;
     for (let i = 0; i < cartItems.length; i++) {
       total = total + cartItems[i].quantity * cartItems[i].FinalPrice;
@@ -43,6 +62,7 @@ function renderCartContents() {
     document.querySelector(".cart-total").textContent =
       `Total: $${total.toFixed(2)}`;
 
+    // Delete Button
     const deleteButtons = productList.querySelectorAll(
       ".cart-card_delete span",
     );
