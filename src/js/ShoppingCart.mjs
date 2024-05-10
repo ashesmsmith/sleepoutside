@@ -69,37 +69,56 @@ function renderCartContents() {
 }
 
 function minus(event){
-  // Changes the qty on screen
+  // get the span element below the minus button
   let qtyElem = event.target.nextElementSibling;
+  // get the qty value from the span element
   let qty = parseInt(qtyElem.innerHTML);
+  // item id from the button clicked
+  let itemId = event.target.dataset.id;
+  // current cart in local storage
+  let cart = getLocalStorage("so-cart");
+  // separate product from cart
+  let product = cart.find((item) => item.id === itemId)
 
-  if (qty >= 2) {
+  if (product.quantity > 1) {
+    // update value on screen
     qty -= 1;
-    qtyElem.innerHTML = qty;
-  }
-  else {
-    // do nothing
-  }
+    qtyElem.innerHTML = qty; 
 
-  // Need to access the qty in localStorage
-  let itemId = event.target.dataset.id; 
-  let cartItems = getLocalStorage(cartLSKey);
+    // update value in local storage
+    product.quantity -= 1;
 
-  console.log(itemId);
-  console.log(cartItems);
+    // update counter, local storage and price
+    updateCartCounter(cart);
+    setLocalStorage("so-cart", cart);
+    renderCartContents();
+  }  
 }
 
 function plus(event){
+  // get the span element above the plus button
   let qtyElem = event.target.previousElementSibling;
+  // get the qty value from the span element
   let qty = parseInt(qtyElem.innerHTML);
-  
-  if (qty >= 1) {
+  // item id from the button clicked
+  let itemId = event.target.dataset.id;
+  // current cart in local storage
+  let cart = getLocalStorage("so-cart");
+  let product = cart.find((item) => item.id === itemId)
+
+  if (product) {
+    // update value on screen
     qty += 1;
     qtyElem.innerHTML = qty;
-  }
-  else {
-    // do nothing
-  }
+
+    // update value in local storage
+    product.quantity += 1;
+
+    // update counter, local storage and price
+    updateCartCounter(cart);
+    setLocalStorage("so-cart", cart);
+    renderCartContents();
+  } 
 }
 
 function deleteFromCart(event) {
