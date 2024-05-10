@@ -16,9 +16,9 @@ function cartItemTemplate(item) {
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
     <button class="cart-card_delete"><span data-id="${item.Id}">⨉</span></button>
     <p class="cart-card__quantity">Qty:
-      <button class="decrease"><</button>
-      ${item.quantity}
-      <button class="increase">></button>
+      <button class="decrease">-</button>
+      <span class="qty">${item.quantity}</span>
+      <button class="increase">+</button>
     </p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
   </li>`;
@@ -41,16 +41,12 @@ function renderCartContents() {
     // Quantity Buttons
     const decreaseQty = productList.querySelectorAll(".decrease");
     decreaseQty.forEach((button) => {
-      button.addEventListener("click", () => {
-        console.log("down"); //TESTING
-      });
-    })
+      button.addEventListener("click", minus);
+    });
 
     const increaseQty = productList.querySelectorAll(".increase");
     increaseQty.forEach((button) => {
-      button.addEventListener("click", () => {
-        console.log("up"); //TESTING
-      });
+      button.addEventListener("click", plus);
     })
 
     let total = 0;
@@ -69,6 +65,32 @@ function renderCartContents() {
     deleteButtons.forEach((button) => {
       button.addEventListener("click", deleteFromCart);
     });
+  }
+}
+
+function minus(event){
+  let qtyElem = event.target.nextElementSibling;
+  let qty = parseInt(qtyElem.innerHTML);
+  
+  if (qty >= 2) {
+    qty -= 1;
+    qtyElem.innerHTML = qty;
+  }
+  else {
+    // do nothing
+  }
+}
+
+function plus(event){
+  let qtyElem = event.target.previousElementSibling;
+  let qty = parseInt(qtyElem.innerHTML);
+  
+  if (qty >= 1) {
+    qty += 1;
+    qtyElem.innerHTML = qty;
+  }
+  else {
+    // do nothing
   }
 }
 
