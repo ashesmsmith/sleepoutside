@@ -16,9 +16,9 @@ function cartItemTemplate(item) {
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
     <button class="cart-card_delete"><span data-id="${item.Id}">⨉</span></button>
     <p class="cart-card__quantity">Qty:
-      <button class="decrease">-</button>
+      <button class="decrease" data-id="${item.Id}">-</button>
       <span class="qty">${item.quantity}</span>
-      <button class="increase">+</button>
+      <button class="increase" data-id="${item.Id}">+</button>
     </p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
   </li>`;
@@ -38,17 +38,6 @@ function renderCartContents() {
     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
     productList.innerHTML = htmlItems.join("");
 
-    // Quantity Buttons
-    const decreaseQty = productList.querySelectorAll(".decrease");
-    decreaseQty.forEach((button) => {
-      button.addEventListener("click", minus);
-    });
-
-    const increaseQty = productList.querySelectorAll(".increase");
-    increaseQty.forEach((button) => {
-      button.addEventListener("click", plus);
-    })
-
     let total = 0;
     for (let i = 0; i < cartItems.length; i++) {
       total = total + cartItems[i].quantity * cartItems[i].FinalPrice;
@@ -65,13 +54,25 @@ function renderCartContents() {
     deleteButtons.forEach((button) => {
       button.addEventListener("click", deleteFromCart);
     });
+
+    // Quantity Buttons
+    const decreaseQty = productList.querySelectorAll(".decrease");
+    decreaseQty.forEach((button) => {
+      button.addEventListener("click", minus);
+    });
+
+    const increaseQty = productList.querySelectorAll(".increase");
+    increaseQty.forEach((button) => {
+      button.addEventListener("click", plus);
+    });
   }
 }
 
 function minus(event){
+  // Changes the qty on screen
   let qtyElem = event.target.nextElementSibling;
   let qty = parseInt(qtyElem.innerHTML);
-  
+
   if (qty >= 2) {
     qty -= 1;
     qtyElem.innerHTML = qty;
@@ -79,6 +80,13 @@ function minus(event){
   else {
     // do nothing
   }
+
+  // Need to access the qty in localStorage
+  let itemId = event.target.dataset.id; 
+  let cartItems = getLocalStorage(cartLSKey);
+
+  console.log(itemId);
+  console.log(cartItems);
 }
 
 function plus(event){
