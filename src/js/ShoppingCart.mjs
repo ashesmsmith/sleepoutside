@@ -15,7 +15,11 @@ function cartItemTemplate(item) {
     </a>
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
     <button class="cart-card_delete"><span data-id="${item.Id}">⨉</span></button>
-    <p class="cart-card__quantity">qty: ${item.quantity}</p>
+    <p class="cart-card__quantity">Qty:
+      <button class="decrease" data-id="${item.Id}">-</button>
+      <span class="qty">${item.quantity}</span>
+      <button class="increase" data-id="${item.Id}">+</button>
+    </p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
   </li>`;
   
@@ -43,13 +47,78 @@ function renderCartContents() {
     document.querySelector(".cart-total").textContent =
       `Total: $${total.toFixed(2)}`;
 
+    // Delete Button
     const deleteButtons = productList.querySelectorAll(
       ".cart-card_delete span",
     );
     deleteButtons.forEach((button) => {
       button.addEventListener("click", deleteFromCart);
     });
+
+    // Quantity Buttons
+    const decreaseQty = productList.querySelectorAll(".decrease");
+    decreaseQty.forEach((button) => {
+      button.addEventListener("click", minus);
+    });
+
+    const increaseQty = productList.querySelectorAll(".increase");
+    increaseQty.forEach((button) => {
+      button.addEventListener("click", plus);
+    });
   }
+}
+
+function minus(event){
+  // get the span element below the minus button
+  let qtyElem = event.target.nextElementSibling;
+  // get the qty value from the span element
+  let qty = parseInt(qtyElem.innerHTML);
+  // item id from the button clicked
+  let itemId = event.target.dataset.id;
+  // current cart in local storage
+  let cart = getLocalStorage("so-cart");
+  // separate product from cart
+  let product = cart.find((item) => item.id === itemId)
+
+  if (product.quantity > 1) {
+    // update value on screen
+    qty -= 1;
+    qtyElem.innerHTML = qty; 
+
+    // update value in local storage
+    product.quantity -= 1;
+
+    // update counter, local storage and price
+    updateCartCounter(cart);
+    setLocalStorage("so-cart", cart);
+    renderCartContents();
+  }  
+}
+
+function plus(event){
+  // get the span element above the plus button
+  let qtyElem = event.target.previousElementSibling;
+  // get the qty value from the span element
+  let qty = parseInt(qtyElem.innerHTML);
+  // item id from the button clicked
+  let itemId = event.target.dataset.id;
+  // current cart in local storage
+  let cart = getLocalStorage("so-cart");
+  let product = cart.find((item) => item.id === itemId)
+
+  if (product) {
+    // update value on screen
+    qty += 1;
+    qtyElem.innerHTML = qty;
+
+    // update value in local storage
+    product.quantity += 1;
+
+    // update counter, local storage and price
+    updateCartCounter(cart);
+    setLocalStorage("so-cart", cart);
+    renderCartContents();
+  } 
 }
 
 function deleteFromCart(event) {
