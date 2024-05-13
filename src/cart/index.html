@@ -1,15 +1,11 @@
 <!doctype html>
-
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Sleep Outside | Cart</title>
-
     <link rel="stylesheet" href="/css/style.css" />
-
     <script src="../js/cart.js" type="module"></script>
     <script type="module" src="/js/main.js" defer></script>
   </head>
@@ -57,7 +53,12 @@
 
       <!-- Cart Total/Future Checkout Button -->
       <div class="cart-footer hide">
-        <p class="cart-total"></p>
+        <h3 class="cart-total"></h3>
+
+        <!-- When clicked, go to the checkout index.html -->
+        <a href="../checkout/index.html">
+          <button type="submit" id="checkout">Proceed to Checkout</button>
+        </a>
       </div>
     </main>
 
