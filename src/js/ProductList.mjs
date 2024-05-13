@@ -55,11 +55,11 @@ export default class ProductListing {
   }
 
   renderSorting(fetchedList) {
-    const brands = fetchedList.reduce((acc, product) => {
+    const fetchedBrands = fetchedList.reduce((acc, product) => {
       const brand = product.Brand.Name;
       if (!acc.includes(brand)) acc.push(brand);
       return acc;
-    }, []);
+    }, []).sort();
 
     const topLine = document.querySelector(".top-line");
     topLine.innerHTML += `
@@ -74,7 +74,7 @@ export default class ProductListing {
         <input id="allBrands" type="checkbox" name="allBrands" value="all-brands" checked/>
         <span>All Brands</span>
       </label>
-      ${brands.map(brand => `
+      ${fetchedBrands.map(brand => `
       <label>
         <input type="checkbox" name="brands" value="${brand}"/>
         <span>${brand}</span>
@@ -83,6 +83,7 @@ export default class ProductListing {
     `;
 
     const orderBy = document.querySelector("#orderBy");
+    const allBrands = document.querySelector("#allBrands");
     const brandCheckboxes = document.querySelectorAll("input[name='brands']");
 
     orderBy.addEventListener("change", (e) => {
@@ -96,41 +97,56 @@ export default class ProductListing {
     brandCheckboxes.forEach(checkbox => {
       checkbox.addEventListener("change", (e) => {
         e.preventDefault();
-        const allBrands = document.querySelector("#allBrands");
         if (allBrands.checked && e.target.checked) allBrands.checked = false;
 
         const selectedBrands = Array.from(brandCheckboxes).reduce((acc, current) => {
           if (current.checked) acc.push(current.value);
           return acc;
-        }, []);
+        }, []).sort();
 
         let sortedList;
 
-        if (selectedBrands.length > 0) {
+        if (selectedBrands.length === 0 ||
+          fetchedBrands.every((v, i) => v === selectedBrands[i])
+        ) { // all brands
+          allBrands.checked = true;
+          sortedList = forAllBrands();
+        } else {
           sortedList = fetchedList.filter(product => selectedBrands.includes(product.Brand.Name));
           sortedList = orderProducts(sortedList, orderBy.value);
-        } else { // all brands
-          allBrands.checked = true;
-          sortedList = orderProducts(fetchedList, orderBy.value);
         }
 
         this.updateRender(sortedList);
       });
     });
 
+    allBrands.addEventListener("change", e => {
+      e.preventDefault();
+      if (!allBrands.checked) {
+        allBrands.checked = true;
+        return;
+      }
+
+      const sortedList = forAllBrands();
+      this.updateRender(sortedList);
+    });
+
+    function forAllBrands() {
+      brandCheckboxes.forEach(checkbox => checkbox.checked = false);
+      const sortedList = orderProducts(fetchedList, orderBy.value);
+      return sortedList;
+    }
+
     function orderProducts(sortingData, orderByValue = "name_ASC") {
       let rule;
 
       if (orderByValue === "price_ASC") {
         rule = (a, b) => a.FinalPrice > b.FinalPrice;
-      }
-      else if (orderByValue === "price_DESC") {
+      } else if (orderByValue === "price_DESC") {
         rule = (a, b) => a.FinalPrice < b.FinalPrice;
-      }
-      else if (orderByValue === "name_ASC") {
+      } else if (orderByValue === "name_ASC") {
         rule = (a, b) => a.NameWithoutBrand > b.NameWithoutBrand;
-      }
-      else if (orderByValue === "name_DESC") {
+      } else if (orderByValue === "name_DESC") {
         rule = (a, b) => a.NameWithoutBrand < b.NameWithoutBrand;
       }
 
