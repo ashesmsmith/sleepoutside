@@ -65,8 +65,10 @@ export default class ProductListing {
     topLine.innerHTML += `
       <span>Order by: </span>
       <select id="orderBy" name="orderBy">
-        <option value="name">name</option>
-        <option value="price">price</option>
+        <option value="name_ASC">name &uarr;</option>
+        <option value="name_DESC">name &darr;</option>
+        <option value="price_ASC">price &uarr;</option>
+        <option value="price_DESC">price &darr;</option>
       </select>
       <label>
         <input id="allBrands" type="checkbox" name="allBrands" value="all-brands" checked/>
