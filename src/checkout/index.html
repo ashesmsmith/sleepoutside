@@ -12,7 +12,7 @@
   <body>
     <header class="divider" id="main-header"></header>
 
-    <main class="divider">
+    <main class="divider" id="checkout-page">
       <h2>Review & Place your Order</h2>
 
       <form name="checkout">
@@ -31,22 +31,25 @@
           <label for="state">State</label>
           <input type="text" name="state" id="state" required>
           <label for="zip-code">Zip Code</label>
-          <input type="number" name="zip-code" id="zip-code" required>
+          <input type="text" name="zip-code" id="zip-code" required>
         </fieldset>
 
         <fieldset>
           <legend>Payment Information</legend>
 
           <label for="credit-card">Credit Card Number</label>
-          <input type="number" name="credit-card" id="credit-card" required>
+          <input type="tel" name="credit-card" id="credit-card"
+          placeholder="xxxx xxxx xxxx xxxx" required>
           <label for="expiration">Expiration Date</label>
-          <input type="number" name="expiration" id="expiration" required>
+          <input type="month" name="expiration" id="expiration" 
+          value="2024/01" required>
           <label for="security-code">Security Code</label>
-          <input type="number" name="security-code" id="security-code" required>
+          <input type="number" name="security-code" id="security-code" 
+          maxlength="3" required>
         </fieldset>
       </form>      
 
-      <section>
+      <section class="checkout-summary">
         <h3>Order Summary</h3>
         <h4 id="subtotal"></h4>
         <h4 id="shipping"></h4>
