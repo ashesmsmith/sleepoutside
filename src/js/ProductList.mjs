@@ -118,12 +118,23 @@ export default class ProductListing {
       });
     });
 
-    function orderProducts(sortingData, orderByValue = "name") {
-      if (orderByValue === "price") {
-        sortingData.sort((a, b) => a.FinalPrice > b.FinalPrice);
-      } else if (orderByValue === "name") {
-        sortingData.sort((a, b) => a.NameWithoutBrand > b.NameWithoutBrand);
+    function orderProducts(sortingData, orderByValue = "name_ASC") {
+      let rule;
+
+      if (orderByValue === "price_ASC") {
+        rule = (a, b) => a.FinalPrice > b.FinalPrice;
       }
+      else if (orderByValue === "price_DESC") {
+        rule = (a, b) => a.FinalPrice < b.FinalPrice;
+      }
+      else if (orderByValue === "name_ASC") {
+        rule = (a, b) => a.NameWithoutBrand > b.NameWithoutBrand;
+      }
+      else if (orderByValue === "name_DESC") {
+        rule = (a, b) => a.NameWithoutBrand < b.NameWithoutBrand;
+      }
+
+      sortingData.sort(rule);
 
       return sortingData;
     }
