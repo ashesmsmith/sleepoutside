@@ -1,4 +1,6 @@
-const baseURL = 'http://wdd330-backend.onrender.com/checkout';
+const baseURL = import.meta.env.VITE_SERVER_URL
+// Error when changed to below URL
+// const baseURL = 'http://wdd330-backend.onrender.com/checkout';
 
 function convertToJson(res) {
   if (res.ok) {
