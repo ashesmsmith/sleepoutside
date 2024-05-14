@@ -8,3 +8,10 @@ checkout.init();
 
 document.querySelector("#zip-code")
     .addEventListener("blur", checkout.calculateOrderTotal.bind(checkout));
+
+document.querySelector("#final-checkout")
+    .addEventListener("click", (event) => {
+        event.preventDefault();
+
+        checkout.checkout();
+    })
