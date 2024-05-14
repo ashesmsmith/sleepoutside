@@ -14,8 +14,8 @@ function convertToJson(res) {
 export default class ExternalServices {
   // assign a category of products to get the path to correct json file
   constructor(category) {
-    // this.category = category;
-    // this.path = `/json/${this.category}.json`;
+    this.category = category;
+    this.path = `/json/${this.category}.json`;
   }
 
   // create list of products from json file
