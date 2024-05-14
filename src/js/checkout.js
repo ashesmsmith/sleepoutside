@@ -6,12 +6,18 @@ loadHeaderFooter();
 const checkout = new CheckoutProcess("so-cart", "checkout-summary");
 checkout.init();
 
-document.querySelector("#zip-code")
-    .addEventListener("blur", checkout.calculateOrderTotal.bind(checkout));
+document
+  .querySelector("#zip-code")
+  .addEventListener("blur", checkout.calculateOrderTotal.bind(checkout));
 
-document.querySelector("#final-checkout")
-    .addEventListener("click", (event) => {
-        event.preventDefault();
+document.querySelector("#final-checkout").addEventListener("click", (event) => {
+  event.preventDefault();
 
-        checkout.checkout();
-    })
+  const form = document.form[0];
+  const checkStatus = form.checkValidity();
+  form.reportValidity();
+
+  if (checkStatus) {
+    checkout.checkout();
+  }
+});

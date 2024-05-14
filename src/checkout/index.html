@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,38 +19,53 @@
           <legend>Shipping Information</legend>
 
           <label for="fname">First Name</label>
-          <input type="text" name="fname" id="fname" required>
+          <input type="text" name="fname" id="fname" required />
           <label for="lname">Last Name</label>
-          <input type="text" name="lname" id="lname" required>
+          <input type="text" name="lname" id="lname" required />
 
           <label for="street">Street Address</label>
-          <input type="text" name="street" id="street" required>
+          <input type="text" name="street" id="street" required />
           <label for="city">City</label>
-          <input type="text" name="city" id="city" required>
+          <input type="text" name="city" id="city" required />
           <label for="state">State</label>
-          <input type="text" name="state" id="state" required>
+          <input type="text" name="state" id="state" required />
           <label for="zip-code">Zip Code</label>
-          <input type="text" name="zip-code" id="zip-code" required>
+          <input type="text" name="zip-code" id="zip-code" required />
         </fieldset>
 
         <fieldset>
           <legend>Payment Information</legend>
 
           <label for="credit-card">Credit Card Number</label>
-          <input type="tel" name="credit-card" id="credit-card"
-          placeholder="xxxx xxxx xxxx xxxx" required>
+          <input
+            type="tel"
+            name="credit-card"
+            id="credit-card"
+            placeholder="xxxx xxxx xxxx xxxx"
+            required
+          />
           <label for="expiration">Expiration Date</label>
-          <input type="month" name="expiration" id="expiration" 
-          value="2024-01" required>
+          <input
+            type="month"
+            name="expiration"
+            id="expiration"
+            value="2024-01"
+            required
+          />
           <label for="security-code">Security Code</label>
-          <input type="number" name="security-code" id="security-code" 
-          maxlength="3" required>
+          <input
+            type="number"
+            name="security-code"
+            id="security-code"
+            maxlength="3"
+            required
+          />
         </fieldset>
-      </form>      
+      </form>
 
       <section class="checkout-summary">
         <h3>Order Summary</h3>
-        
+
         <h4 id="subtotal"></h4>
         <h4 id="shipping"></h4>
         <h4 id="tax"></h4>

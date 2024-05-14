@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, alertMessage, removeAllAlerts } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 const services = new ExternalServices();
@@ -41,16 +41,20 @@ export default class CheckoutProcess {
         this.itemTotal = amounts.reduce((sum, item) => sum + item);
         // display subtotal
         summaryElement.textContent = `Subtotal: $${this.itemTotal.toFixed(2)}`;
-
-        this.calculateOrderTotal();
     }
 
     calculateOrderTotal() {
+        // list of each items quantity in the cart
         const quantity = this.list.map((item) => item.quantity);
+        // calculate the total quantity of items in the cart
         const newQty = quantity.reduce((sum, item) => sum + item);
+        // subtract one from the total quantity because the first item
+        // ships for $10 and the others ship for additional $2
         const trueQty = newQty - 1;
+        // calculate shipping and tax
         this.shipping = 10 + (trueQty * 2);
         this.tax = (this.itemTotal * .06);
+        // Calculate final total with items, shipping and tax
         this.orderTotal = (this.itemTotal + this.shipping + this.tax);
         
         this.displayOrderTotals();
@@ -70,8 +74,8 @@ export default class CheckoutProcess {
         // get form from checkout index page
         const formElement = document.forms["checkout"];
 
+        // convert data from form to json
         const json = formDataToJSON(formElement);
-
         json.orderDate = new Date();
         json.orderTotal = this.orderTotal;
         json.tax = this.tax;
@@ -83,9 +87,19 @@ export default class CheckoutProcess {
         try {
             const res = await services.checkout(json);
             console.log(res);
+            // empty the cart on successful submit
+            setLocalStorage("so-cart", []);
+            // send user to success page
+            location.assign("/checkout/success.html");
         } 
-        
-        catch (err) {
+        // display error in console if there was one
+        catch (err) { 
+            // clear existing alerts
+            removeAllAlerts();
+            for (let message in err.message) {
+                alertMessage(err.message[message]);
+            }
+
             console.log(err);
         }
     }
