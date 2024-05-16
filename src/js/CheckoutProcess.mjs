@@ -5,8 +5,8 @@ const services = new ExternalServices();
 
 // convert data from the form on checkout index page to json
 function formDataToJSON(formElement) {
-    const formData = new FormData(formElement),
-        convertedJSON = {};
+    const formData = new FormData(formElement);
+    const convertedJSON = {};
 
     formData.forEach(function (value, key) {
         convertedJSON[key] = value;
@@ -38,7 +38,7 @@ export default class CheckoutProcess {
         // create new list/ item price * quantity
         const amounts = this.list.map((item) => item.FinalPrice * item.quantity);
         // add the totals from the new list together and assign value to this.itemTotal
-        this.itemTotal = amounts.reduce((sum, item) => sum + item);
+        this.itemTotal = amounts.reduce((sum, item) => sum + item, 0);
         // display subtotal
         summaryElement.textContent = `Subtotal: $${this.itemTotal.toFixed(2)}`;
     }
@@ -70,19 +70,18 @@ export default class CheckoutProcess {
         orderTotal.textContent = `Final Total: $${this.orderTotal.toFixed(2)}`;
     }
 
-    async checkout(form) {
+    async checkout() {
         // get form from checkout index page
         const formElement = document.forms["checkout"];
 
         // convert data from form to json
-        const json = formDataToJSON(formElement);
+      const json = formDataToJSON(formElement);
         json.orderDate = new Date();
         json.orderTotal = this.orderTotal;
         json.tax = this.tax;
         json.shipping = this.shipping;
         json.items = packageItems(this.list);
-        
-        console.log(json);
+      json.cardNumber = json["credit-card"];
 
         try {
             const res = await services.checkout(json);
@@ -107,7 +106,7 @@ export default class CheckoutProcess {
 
 function packageItems(items) {
     const simpleItems = items.map((item) => {
-        console.log(item);
+        console.log("");
         return {
             id: item.Id,
             price: item.FinalPrice,

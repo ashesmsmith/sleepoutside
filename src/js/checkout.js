@@ -13,7 +13,7 @@ document
 document.querySelector("#final-checkout").addEventListener("click", (event) => {
   event.preventDefault();
 
-  const form = document.form[0];
+  const form = document.forms[0];
   const checkStatus = form.checkValidity();
   form.reportValidity();
 
