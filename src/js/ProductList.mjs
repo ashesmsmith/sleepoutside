@@ -1,6 +1,5 @@
 // Purpose: Create a list  of product cards in HTML form array
 // small product card for home page or pages with multiple products listed
-import ProductData from "./ProductData.mjs";
 import { renderListWithTemplate, getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 function productCardTemplate(product) {
@@ -34,6 +33,7 @@ export default class ProductListing {
 
   async init() {
     // dataSource is connected to ExternalServices.mjs
+
     // getData() creates the list of products from that source
     const list = await dataSource.getData(this.category);
 
