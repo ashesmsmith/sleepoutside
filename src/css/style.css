@@ -344,6 +344,15 @@ button {
   padding: 20px;
 }
 
+.alert-messages {
+  padding: 10px;
+  background: orange;
+}
+
+#close-alert {
+  cursor: pointer;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

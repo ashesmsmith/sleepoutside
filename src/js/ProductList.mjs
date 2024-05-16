@@ -1,6 +1,5 @@
 // Purpose: Create a list  of product cards in HTML form array
 // small product card for home page or pages with multiple products listed
-import ProductData from "./ProductData.mjs";
 import { renderListWithTemplate, getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 function productCardTemplate(product) {
@@ -24,18 +23,20 @@ function productCardTemplate(product) {
 export default class ProductListing {
   constructor(
     category, // options will be tents, sleeping-bags and backpacks
+    dataSource, // json file link created in ExternalServices.mjs after instance in main.js
     listElement // HTML list element
   ) {
     this.category = category;
+    this.dataSource = dataSource;
     this.listElement = listElement;
     this.sortingLSKey = "sorting";
   }
 
   async init() {
-    // create an instance of ProductData (json file link)
-    const dataSource = new ProductData(this.category);
+    // dataSource is connected to ExternalServices.mjs
+
     // getData() creates the list of products from that source
-    const list = await dataSource.getData(this.category);
+    const list = await this.dataSource.getData(this.category);
 
     // default sorting
     list.sort((a, b) => a.NameWithoutBrand > b.NameWithoutBrand);
