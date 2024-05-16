@@ -27,6 +27,7 @@ export default class ProductListing {
     listElement // HTML list element
   ) {
     this.category = category;
+    this.dataSource = dataSource;
     this.listElement = listElement;
     this.sortingLSKey = "sorting";
   }
@@ -35,7 +36,7 @@ export default class ProductListing {
     // dataSource is connected to ExternalServices.mjs
 
     // getData() creates the list of products from that source
-    const list = await dataSource.getData(this.category);
+    const list = await this.dataSource.getData(this.category);
 
     // default sorting
     list.sort((a, b) => a.NameWithoutBrand > b.NameWithoutBrand);

@@ -14,7 +14,7 @@ const dataSource = new ExternalServices(category);
 const element = document.querySelector(".product-list");
 
 // send category, json link and html element to ProductListing
-const listing = new ProductListing(category, element);
+const listing = new ProductListing(category, dataSource, element);
 
 // create and display list of products on page
 listing.init();
