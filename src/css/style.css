@@ -340,9 +340,14 @@ button {
   z-index: 999;
 }
 
-.alert {
-  padding: 20px;
+.alert-messages {
+  padding: 15px;
+  background: orange;
 }
+
+#close-alert {
+  cursor: pointer;
+} 
 
 @media screen and (min-width: 500px) {
   body {

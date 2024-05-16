@@ -24,6 +24,7 @@ function productCardTemplate(product) {
 export default class ProductListing {
   constructor(
     category, // options will be tents, sleeping-bags and backpacks
+    dataSource, // json file link created in ExternalServices.mjs after instance in main.js
     listElement // HTML list element
   ) {
     this.category = category;
@@ -32,8 +33,7 @@ export default class ProductListing {
   }
 
   async init() {
-    // create an instance of ProductData (json file link)
-    const dataSource = new ProductData(this.category);
+    // dataSource is connected to ExternalServices.mjs
     // getData() creates the list of products from that source
     const list = await dataSource.getData(this.category);
 

@@ -1,10 +1,14 @@
 import { getParams } from "./utils.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductListing from "./ProductList.mjs";
 
 // get category value from URL
 const category = getParams("category");
 
-document.querySelector(".page-title").innerHTML += category;
+document.querySelector(".page-title").innerHTML += `${category}`;
+
+// create an instance of ExternalServices
+const dataSource = new ExternalServices(category);
 
 // ul on index.html with class of product-list
 const element = document.querySelector(".product-list");
