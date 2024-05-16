@@ -82,8 +82,8 @@ export async function loadHeaderFooter() {
 
 export function alertMessage(message, scroll = true, duration = 3000) {
   const alert = document.createElement("div");
-  alert.classList.add("alert");
-  alert.innerHTML = `<p>${message}</p><span>X</span>`;
+  alert.classList.add("alert-messages");
+  alert.innerHTML = `<p>${message}</p><span id="close-alert">X</span>`;
 
   alert.addEventListener("click", function (e) {
     if (e.target.tagName == "SPAN") {
