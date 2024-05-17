@@ -135,6 +135,20 @@ button {
   opacity: 0.8;
 }
 
+#addToCart:hover {
+  transform: scale(1.25, 1.25);
+}
+
+.wiggle {
+  animation: wiggle 1s alternate 3;
+}
+
+@keyframes wiggle {
+  25% {left:10px}
+  50% {left: 0}
+  75% {left:10px}
+  100% {left: 0}
+}
 /* End cart icon styles */
 
 .mission {

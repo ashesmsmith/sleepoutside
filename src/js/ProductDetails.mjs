@@ -42,6 +42,9 @@ export default class ProductDetails {
         document
             .getElementById("addToCart")
             .addEventListener("click", this.addProductToCart.bind(this));
+
+        document.querySelector("#addToCart")
+            .addEventListener("click", wiggle);
     }
 
     addProductToCart() {
@@ -69,4 +72,13 @@ export default class ProductDetails {
         // insert product details formatted with template after selected element
         element.insertAdjacentHTML("afterBegin", productDetailsTemplate(this.product));
     }
+}
+
+export function wiggle() {
+    let cartIcon = document.querySelector(".cart");
+    cartIcon.classList.toggle("wiggle");
+
+    cartIcon.addEventListener("animationend", () => {
+        cartIcon.classList.toggle("wiggle");
+    });
 }
