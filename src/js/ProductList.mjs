@@ -142,13 +142,13 @@ export default class ProductListing {
       let rule;
 
       if (orderByValue === "price_ASC") {
-        rule = (a, b) => a.FinalPrice > b.FinalPrice;
+        rule = (a, b) => a.FinalPrice - b.FinalPrice;
       } else if (orderByValue === "price_DESC") {
-        rule = (a, b) => a.FinalPrice < b.FinalPrice;
+        rule = (a, b) => b.FinalPrice - a.FinalPrice;
       } else if (orderByValue === "name_ASC") {
-        rule = (a, b) => a.NameWithoutBrand > b.NameWithoutBrand;
+        rule = (a, b) => a.NameWithoutBrand.localeCompare(b.NameWithoutBrand);
       } else if (orderByValue === "name_DESC") {
-        rule = (a, b) => a.NameWithoutBrand < b.NameWithoutBrand;
+        rule = (a, b) => b.NameWithoutBrand.localeCompare(a.NameWithoutBrand);
       }
 
       sortingData.sort(rule);
